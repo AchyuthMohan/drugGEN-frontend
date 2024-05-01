@@ -1,10 +1,13 @@
-import { useState } from "react";
+import React, { useState, ChangeEvent } from "react";
 import "./MainPage.css";
 import { baseUrl } from "../../utils/urls";
 import axios from "axios";
-const MainPage = () => {
-  const [molecules, setMolecules] = useState([]);
-  const [numberOfMolecules, setNumberOfMolecules] = useState("");
+
+interface MainPageProps {}
+
+const MainPage: React.FC<MainPageProps> = () => {
+  const [molecules, setMolecules] = useState<string[]>([]);
+  const [numberOfMolecules, setNumberOfMolecules] = useState<string>("");
 
   const fetchMolecules = async () => {
     try {
@@ -18,7 +21,7 @@ const MainPage = () => {
     }
   };
 
-  const handleInputChange = (event) => {
+  const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     setNumberOfMolecules(event.target.value);
   };
 
@@ -69,7 +72,7 @@ const MainPage = () => {
         <h4>SMILE notations generated:</h4>
         {molecules.length !== 0 ? (
           <ul>
-            {molecules?.map((molecule, index) => {
+            {molecules?.map((molecule: string, index: number) => {
               return <li key={index}>{molecule}</li>;
             })}
           </ul>
